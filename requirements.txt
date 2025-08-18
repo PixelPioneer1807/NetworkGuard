@@ -6,5 +6,7 @@ numpy
 certifi
 scikit-learn
 dill
+mlflow
+dagshub
 # -e . 
 
