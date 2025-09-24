@@ -28,9 +28,6 @@ from urllib.parse import urlparse
 
 import dagshub
 dagshub.init(repo_owner='PixelPioneer1807', repo_name='NetworkGuard', mlflow=True)
-# os.environ["MLFLOW_TRACKING_URI"]="https://dagshub.com/krishnaik06/networksecurity.mlflow"
-# os.environ["MLFLOW_TRACKING_USERNAME"]="krishnaik06"
-# os.environ["MLFLOW_TRACKING_PASSWORD"]="7104284f1bb44ece21e0e2adb4e36a250ae3251f"
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifact):
@@ -54,7 +51,7 @@ class ModelTrainer:
             mlflow.log_metric("precision",precision_score)
             mlflow.log_metric("recall_score",recall_score)
             mlflow.sklearn.log_model(best_model,"model")
-            # Model registry does not work with file store
+            # Model registry does not work with file sto/re
             if tracking_url_type_store != "file":
                 mlflow.sklearn.log_model(
                     sk_model=best_model,
@@ -117,7 +114,6 @@ class ModelTrainer:
         ## Track the experiements with mlflow
         self.track_mlflow(best_model,classification_train_metric)
 
-
         y_test_pred=best_model.predict(x_test)
         classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
 
@@ -142,13 +138,6 @@ class ModelTrainer:
         logging.info(f"Model trainer artifact: {model_trainer_artifact}")
         return model_trainer_artifact
 
-
-        
-
-
-       
-    
-    
         
     def initiate_model_trainer(self)->ModelTrainerArtifact:
         try:
